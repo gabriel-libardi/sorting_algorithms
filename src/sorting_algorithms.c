@@ -48,14 +48,19 @@ void insertion_sort(int *num_array, size_t length) {
     }
 
     for (int *to_insert = num_array + 1; to_insert < num_array + length; to_insert++) {
-        for (int *compare_to = to_insert - 1; compare_to >= num_array; compare_to--) {
-            if (*(compare_to + 1) < *(compare_to)) {
-                swap(compare_to, compare_to + 1);
+        int copy = *to_insert;
+        int *compare_to = to_insert - 1;
 
+        while (compare_to >= num_array) {
+            if (copy < *(compare_to)) {
+                *(compare_to + 1) = *(compare_to);
             } else {
                 break;
             }
+            compare_to--;
         }
+
+        *(compare_to + 1) = copy;
     }
 }
 
@@ -70,6 +75,6 @@ void merge_sort(int *num_array, size_t length) {
     } else {
         merge_sort(num_array, length/2);
         merge_sort(num_array + length/2, length - length/2);
-        insertion_sort(num_array, length);
+        merge_ordered_lists(num_array, length);
     }
 }
