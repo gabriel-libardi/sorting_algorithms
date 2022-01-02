@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "sorting_algorithms.h"
 #include "utils.h"
 
@@ -65,16 +66,28 @@ void insertion_sort(int *num_array, size_t length) {
 }
 
 
+void _merge_sort(int *num_array, size_t beggining, size_t end, int *buffer) {
+    if ((num_array == NULL) || (buffer == NULL)) {
+        exit(EXIT_FAILURE);
+
+    } else if (beggining >= end) {
+        return;
+
+    } else {
+        _merge_sort(num_array, beggining, (beggining + end)/2, buffer);
+        _merge_sort(num_array, (beggining + end)/2 + 1, end, buffer);
+        merge_halves(num_array, beggining, end, buffer);
+    }
+}
+
+
 void merge_sort(int *num_array, size_t length) {
     if ((num_array == NULL) || (length == 1)) {
         return;
 
-    } else if (length == 2 && (*num_array > *(num_array + 1))) {
-        swap(num_array, num_array + 1);
-
     } else {
-        merge_sort(num_array, length/2);
-        merge_sort(num_array + length/2, length - length/2);
-        merge_ordered_lists(num_array, length);
+        int *buffer = malloc(sizeof(int)*length);
+        _merge_sort(num_array, 0, length - 1, buffer);
+        free(buffer);
     }
 }

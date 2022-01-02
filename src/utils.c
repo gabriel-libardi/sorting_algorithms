@@ -9,24 +9,30 @@ void swap(int *num_ptr_1, int *num_ptr_2) {
 }
 
 
-void merge_ordered_lists(int *num_array, size_t length) {
-    if (num_array == NULL) {
+void merge_halves(int *num_array, size_t beggining, size_t end, int *buffer) {
+    if (num_array == NULL || buffer == NULL) {
         return;
     }
 
-    for (int *to_insert = num_array + length/2; to_insert < num_array + length; to_insert++) {
-        int copy = *to_insert;
-        int *compare_to = to_insert - 1;
+    size_t buf_index = beggining;
+    size_t half_1_index = beggining;
+    size_t half_2_index = (beggining + end)/2 + 1;
 
-        while (compare_to >= num_array) {
-            if (copy < *(compare_to)) {
-                *(compare_to + 1) = *(compare_to);
-            } else {
-                break;
-            }
-            compare_to--;
+    while (buf_index <= end) {
+        if (((half_2_index > end) || (num_array[half_1_index] < num_array[half_2_index]))
+            && (half_1_index <= (beggining + end)/2)) {
+            buffer[buf_index] = num_array[half_1_index];
+            half_1_index++;
+
+        } else {
+            buffer[buf_index] = num_array[half_2_index];
+            half_2_index++;
         }
 
-        *(compare_to + 1) = copy;
+        buf_index++;
+    }
+
+    for (size_t index = beggining; index <= end; index++) {
+        num_array[index] = buffer[index];
     }
 }
