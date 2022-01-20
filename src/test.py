@@ -69,3 +69,18 @@ def test_merge_sort():
         sort.merge_sort(c_int_rand_list, length)
 
         assert sorted(int_rand_list) == [element for element in c_int_rand_list]
+
+
+def test_heap_sort():
+    '''Tests whether heap_sort() works properly.'''
+
+    for _ in range(1000):
+        int_rand_list = rand_list(25)
+        c_int_rand_list = IntVector()
+        length = ctypes.c_size_t(25)
+
+        for index in range(25):
+            c_int_rand_list[index] = int_rand_list[index]
+        sort.heap_sort(c_int_rand_list, length)
+
+        assert sorted(int_rand_list) == [element for element in c_int_rand_list]

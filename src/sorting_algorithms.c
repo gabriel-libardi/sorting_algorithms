@@ -91,3 +91,13 @@ void merge_sort(int *num_array, size_t length) {
         free(buffer);
     }
 }
+
+
+void heap_sort(int *num_array, size_t length) {
+    build_max_heap(num_array, length);
+
+    for (size_t iterator = 0; iterator < length; iterator++) {
+        swap(num_array, num_array + length - iterator - 1);
+        down_heapfy(num_array, 0, length - iterator - 1);
+    }
+}

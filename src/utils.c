@@ -36,3 +36,33 @@ void merge_halves(int *num_array, size_t beggining, size_t end, int *buffer) {
         num_array[index] = buffer[index];
     }
 }
+
+
+void build_max_heap(int *heap, size_t length) {
+    for (size_t root_index = length/2 - 1; root_index < length; root_index--) {
+        down_heapfy(heap, root_index, length);
+    }
+}
+
+
+void down_heapfy(int *heap, size_t start_index, size_t length) {
+    for (size_t index = start_index; index < length;) {
+        size_t largest = index;
+
+        if (2*index + 1 < length && heap[largest] < heap[2*index + 1]) {
+            largest = 2*index + 1;
+        } 
+        
+        if (2*index + 2 < length && heap[largest] < heap[2*index + 2]) {
+            largest = 2*index + 2;
+        }
+
+        if (largest != index) {
+            swap(heap + index, heap + largest);
+            index = largest;
+
+        } else {
+            break;
+        }
+    }
+}
