@@ -88,9 +88,11 @@ void insertion_sort(int *num_array, size_t length) {
         while (compare_to >= num_array) {
             if (copy < *(compare_to)) {
                 *(compare_to + 1) = *(compare_to);
+
             } else {
                 break;
             }
+
             compare_to--;
         }
 
@@ -148,4 +150,24 @@ void heap_sort(int *num_array, size_t length) {
         swap(num_array, num_array + length - iterator - 1);
         down_heapfy(num_array, 0, length - iterator - 1);
     }
+}
+
+
+void shell_sort(int *num_array, size_t length) {
+    for (ULONG power = max_pow_2(length); power > 0; power /= 2) {
+        for_while(ULONG period = power, period < length, !(period%2), period *= 3, period /= 2) {
+            for (size_t chain = 0; chain < period; chain ++) {
+                for (size_t index = period + chain; index < length; index += period) {
+                    if (num_array[index - period] > num_array[index]) {
+                        swap(num_array + index, num_array + index - period);
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+void quick_sort(int *num_array, size_t length) {
+    
 }
