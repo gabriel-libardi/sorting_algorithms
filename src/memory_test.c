@@ -3,7 +3,7 @@
 #include "utils.h"
 #include "sorting_algorithms.h"
 
-#define NUM_TESTS 100
+#define NUM_TESTS 10
 
 
 int *rand_list(size_t length) {

@@ -66,3 +66,14 @@ void down_heapfy(int *heap, size_t start_index, size_t length) {
         }
     }
 }
+
+
+unsigned long max_pow_2(size_t positive_num) {
+    unsigned long max_pow_2 = 1;
+
+    for (double iterator = positive_num; iterator > 2; iterator /= 2) {
+        max_pow_2 *= 2;
+    }
+
+    return max_pow_2;
+}
