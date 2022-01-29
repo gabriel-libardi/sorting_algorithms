@@ -12,6 +12,8 @@ export LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH
 
 #Run automated tests.
 pytest -vv test.py
+make all
+valgrind --leak-check=full --track-origins=yes ./memory_test
 
 #Go back to the previous directory.
 cd $current_dir
