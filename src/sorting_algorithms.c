@@ -63,7 +63,7 @@ void selection_sort(int *num_array, size_t length) {
 
 
 /************************************************************
-    Insertion Sort has wort case time comlpexity of O(n²) and
+    Insertion Sort has wort case time complexity of O(n²) and
 worst case space complexity of O(1) (It is an in-place
 algorithm). It is adaptative for nearly sorted lists
 (just like bubble sort), having a worst case time complexity
@@ -153,10 +153,27 @@ void heap_sort(int *num_array, size_t length) {
 }
 
 
+/**************************************************************
+    Shell sort is a family of sorting algorithms that improve
+on insertion sort. Each of them generate a sequence p[i] of
+positive integers and p[i]-order the array. The last p[i] is
+always equal to one, so as to guarantee that the array is 
+ordered at the end of the procedure (because 1-sorting is
+basically just insertion sort). The idea is to arrive at the
+last step with a nearly sorted list and capitalize on the
+efficiency of insertion sort for nearly sorted lists. The best
+shellsort algorithm has a worst case time complexity of
+O(nlog²n), and a worst case space complexity of O(1) (it is
+an in-place algorithm). In practice, it is faster than most 
+of the algorithms implemented above. However, it is neither
+stable, nor adaptative, nor online.
+***************************************************************/
+
+
 void shell_sort(int *num_array, size_t length) {
     for (ULONG power = max_pow_2(length); power > 0; power /= 2) {
         for_while(ULONG period = power, period < length, !(period%2), period *= 3, period /= 2) {
-            for (size_t chain = 0; chain < period; chain ++) {
+            for (size_t chain = 0; chain < period; chain++) {
                 for (size_t index = period + chain; index < length; index += period) {
                     if (num_array[index - period] > num_array[index]) {
                         swap(num_array + index, num_array + index - period);
@@ -169,5 +186,5 @@ void shell_sort(int *num_array, size_t length) {
 
 
 void quick_sort(int *num_array, size_t length) {
-    
+
 }
