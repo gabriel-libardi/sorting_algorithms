@@ -27,17 +27,23 @@ int main(int argc, char **argv) {
         int *list_3 = rand_list(25);
         int *list_4 = rand_list(25);
         int *list_5 = rand_list(25);
+        int *list_6 = rand_list(25);
+        int *list_7 = rand_list(25);
 
         bubble_sort(list_1, 25);
         selection_sort(list_2, 25);
         insertion_sort(list_3, 25);
         merge_sort(list_4, 25);
         heap_sort(list_5, 25);
+        shell_sort(list_6, 25);
+        quick_sort(list_7, 25);
 
         free(list_1);
         free(list_2);
         free(list_3);
         free(list_4);
         free(list_5);
+        free(list_6);
+        free(list_7);
     }
 }

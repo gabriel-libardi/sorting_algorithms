@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
+#include <stdbool.h>
 #include "sorting_algorithms.h"
 #include "utils.h"
 
@@ -185,6 +185,52 @@ void shell_sort(int *num_array, size_t length) {
 }
 
 
-void quick_sort(int *num_array, size_t length) {
+/*************************************************************
+    Quicksort is a classic divide-and-conquer algorithm and it
+is the de facto king of sorting algorithms. It has a worst case 
+time complexity of O(n²) and a worst case space complexity of
+O(log(n)). However, its average time complexity is O(nlog(n))
+and it is in pratice much faster than all the other algorithms.
+It is neither stable, nor adaptative, nor online.
+*************************************************************/
 
+
+void _quick_sort(int *num_array, size_t beggining, size_t end) {
+    if (beggining >= end) {
+        return;
+    }
+
+    int pivot = num_array[(beggining + end)/2];
+    size_t smaller = beggining;
+    size_t bigger = end;
+
+    while (true) {
+        while (num_array[smaller] < pivot) {
+            smaller++;
+        }
+
+        while (num_array[bigger] > pivot) {
+            bigger--;
+        }
+
+        if (bigger <= smaller) {
+            break;
+        }
+
+        swap(num_array + smaller, num_array + bigger);
+        smaller++;
+        bigger--;
+    }
+
+    _quick_sort(num_array, beggining, bigger);
+    _quick_sort(num_array, bigger + 1, end);
+}
+
+
+void quick_sort(int *num_array, size_t length) {
+    if (num_array == NULL || length == 1) {
+        return;
+    }
+
+    _quick_sort(num_array, 0, length - 1);
 }
