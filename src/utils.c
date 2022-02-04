@@ -77,3 +77,25 @@ unsigned long max_pow_2(size_t positive_num) {
 
     return max_pow_2;
 }
+
+
+size_t partition(int *num_array, size_t beggining, size_t end) {
+    int pivot = num_array[(beggining + end)/2];
+    size_t smaller = beggining;
+    size_t bigger = end;
+
+    while (true) {
+        while (num_array[smaller] < pivot) smaller++;
+        while (num_array[bigger] > pivot) bigger--;
+
+        if (bigger <= smaller) {
+            break;
+        }
+
+        swap(num_array + smaller, num_array + bigger);
+        smaller++;
+        bigger--;
+    }
+
+    return bigger;
+}
