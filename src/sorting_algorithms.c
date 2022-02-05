@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
+#include <stdbool.h>
 #include "sorting_algorithms.h"
 #include "utils.h"
 
@@ -185,6 +185,67 @@ void shell_sort(int *num_array, size_t length) {
 }
 
 
-void quick_sort(int *num_array, size_t length) {
+/*************************************************************
+    Quicksort is a classic divide-and-conquer algorithm and it
+is the de facto king of sorting algorithms. It has a worst case 
+time complexity of O(n²) and a worst case space complexity of
+O(log(n)). However, its average time complexity is O(nlog(n))
+and it is in pratice much faster than all the other algorithms.
+It is neither stable, nor adaptative, nor online.
+*************************************************************/
 
+
+void _quick_sort(int *num_array, size_t beggining, size_t end) {
+    if (beggining >= end) {
+        return;
+    }
+
+    size_t partition_index = partition(num_array, beggining, end);
+    _quick_sort(num_array, beggining, partition_index);
+    _quick_sort(num_array, partition_index + 1, end);
+}
+
+
+void quick_sort(int *num_array, size_t length) {
+    if (num_array == NULL || length == 1) {
+        return;
+    }
+
+    _quick_sort(num_array, 0, length - 1);
+}
+
+
+/*************************************************************
+    
+*************************************************************/
+
+
+void counting_sort(int *num_array, size_t length, size_t num_types) {
+    /*******************************************************   
+    This imlpementation sorts numbers n such that:
+    -(ceiling(num_types/2) - 1) <= n <= floor(num_types/2)
+    ********************************************************/
+    size_t *count = calloc(num_types, sizeof(size_t));
+    size_t shift = (num_types - 1)/2;
+    int *output = malloc(sizeof(int)*length);
+
+    for (size_t index = 0; index < length; index++) {
+        count[num_array[index] + shift]++;
+    }
+
+    for (size_t index = 1; index < num_types; index++) {
+        count[index] += count[index - 1];
+    }
+
+    for (size_t index = length - 1; index < length; index--) {
+        count[num_array[index] + shift]--;
+        output[count[num_array[index] + shift]] = num_array[index];
+    }
+
+    for (size_t index = 0; index < length; index++) {
+        num_array[index] = output[index];
+    }
+
+    free(count);
+    free(output);
 }

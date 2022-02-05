@@ -99,3 +99,33 @@ def test_shell_sort():
         sort.shell_sort(c_int_rand_list, length)
 
         assert sorted(int_rand_list) == [element for element in c_int_rand_list]
+
+
+def test_quick_sort():
+    '''Tests whether quick_sort() works properly.'''
+
+    for _ in range(1000):
+        int_rand_list = rand_list(25)
+        c_int_rand_list = IntVector()
+        length = ctypes.c_size_t(25)
+
+        for index in range(25):
+            c_int_rand_list[index] = int_rand_list[index]
+        sort.quick_sort(c_int_rand_list, length)
+
+        assert sorted(int_rand_list) == [element for element in c_int_rand_list]
+
+
+def test_counting_sort():
+    '''Tests whether counting_sort() works properly.'''
+
+    for _ in range(1000):
+        int_rand_list = rand_list(25)
+        c_int_rand_list = IntVector()
+        length = ctypes.c_size_t(25)
+
+        for index in range(25):
+            c_int_rand_list[index] = int_rand_list[index]
+        sort.counting_sort(c_int_rand_list, length, 201)
+
+        assert sorted(int_rand_list) == [element for element in c_int_rand_list]
