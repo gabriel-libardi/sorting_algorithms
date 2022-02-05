@@ -213,3 +213,39 @@ void quick_sort(int *num_array, size_t length) {
 
     _quick_sort(num_array, 0, length - 1);
 }
+
+
+/*************************************************************
+    
+*************************************************************/
+
+
+void counting_sort(int *num_array, size_t length, size_t num_types) {
+    /*******************************************************   
+    This imlpementation sorts numbers n such that:
+    -(ceiling(num_types/2) - 1) <= n <= floor(num_types/2)
+    ********************************************************/
+    size_t *count = calloc(num_types, sizeof(size_t));
+    size_t shift = (num_types - 1)/2;
+    int *output = malloc(sizeof(int)*length);
+
+    for (size_t index = 0; index < length; index++) {
+        count[num_array[index] + shift]++;
+    }
+
+    for (size_t index = 1; index < num_types; index++) {
+        count[index] += count[index - 1];
+    }
+
+    for (size_t index = length - 1; index < length; index--) {
+        count[num_array[index] + shift]--;
+        output[count[num_array[index] + shift]] = num_array[index];
+    }
+
+    for (size_t index = 0; index < length; index++) {
+        num_array[index] = output[index];
+    }
+
+    free(count);
+    free(output);
+}

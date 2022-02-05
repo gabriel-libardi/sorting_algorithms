@@ -9,6 +9,8 @@ void _merge_sort(int *num_array, size_t beggining, size_t end, int *buffer);
 void merge_sort(int *num_array, size_t length);
 void heap_sort(int *num_array, size_t length);
 void shell_sort(int *num_array, size_t length);
+void quick_sort(int *num_array, size_t length);
+void counting_sort(int *num_array, size_t length, size_t num_types);
 
 
 #endif

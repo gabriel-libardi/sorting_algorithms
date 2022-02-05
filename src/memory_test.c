@@ -29,6 +29,7 @@ int main(int argc, char **argv) {
         int *list_5 = rand_list(25);
         int *list_6 = rand_list(25);
         int *list_7 = rand_list(25);
+        int *list_8 = rand_list(25);
 
         bubble_sort(list_1, 25);
         selection_sort(list_2, 25);
@@ -37,6 +38,7 @@ int main(int argc, char **argv) {
         heap_sort(list_5, 25);
         shell_sort(list_6, 25);
         quick_sort(list_7, 25);
+        counting_sort(list_8, 25, 400);
 
         free(list_1);
         free(list_2);
@@ -45,5 +47,6 @@ int main(int argc, char **argv) {
         free(list_5);
         free(list_6);
         free(list_7);
+        free(list_8);
     }
 }
