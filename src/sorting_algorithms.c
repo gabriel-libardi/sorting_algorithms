@@ -216,7 +216,14 @@ void quick_sort(int *num_array, size_t length) {
 
 
 /*************************************************************
-    
+    Counting sort has a worst time complexity of O(nk), where
+n is the size of the array and k is the number of distinct 
+elements in the array. Hence, this algorithm is excellent for
+large arrays with few distinct elements, but very bad (roughly
+quadratic) in random arrays. Its worst case space complexity
+is O(n + k), for it utilizes an auxiliary array and a counting
+array. Furthermore, this sorting method is stable, not
+adaptable and not online.
 *************************************************************/
 
 
