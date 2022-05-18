@@ -195,6 +195,15 @@ It is neither stable, nor adaptative, nor online.
 *************************************************************/
 
 
+void quick_sort(int *num_array, size_t length) {
+    if (num_array == NULL || length == 1) {
+        return;
+    }
+
+    _quick_sort(num_array, 0, length - 1);
+}
+
+
 void _quick_sort(int *num_array, size_t beggining, size_t end) {
     if (beggining >= end) {
         return;
@@ -206,12 +215,28 @@ void _quick_sort(int *num_array, size_t beggining, size_t end) {
 }
 
 
-void quick_sort(int *num_array, size_t length) {
+/*************************************************************
+    The following code implements the lomuto partition.
+*************************************************************/
+
+
+void quick_sort_lomuto(int *num_array, size_t length) {
     if (num_array == NULL || length == 1) {
         return;
     }
 
-    _quick_sort(num_array, 0, length - 1);
+    _quick_sort_lomuto(num_array, 0, length - 1);
+}
+
+
+void _quick_sort_lomuto(int *num_array, size_t beggining, size_t end) {
+    if (beggining >= end) {
+        return;
+    }
+
+    size_t partition_index = lomuto_partition(num_array, beggining, end);
+    _quick_sort_lomuto(num_array, beggining, partition_index - 1);
+    _quick_sort_lomuto(num_array, partition_index + 1, end);
 }
 
 

@@ -99,3 +99,19 @@ size_t partition(int *num_array, size_t beggining, size_t end) {
 
     return bigger;
 }
+
+
+size_t lomuto_partition(int *num_array, size_t beggining, size_t end) {
+    int pivot = num_array[end];
+    size_t smaller = beggining - 1;
+
+    for (size_t bigger = beggining; bigger < end; bigger++) {
+        if (pivot >= num_array[bigger]) {
+            smaller++;
+            swap(num_array + smaller, num_array + bigger);
+        }
+    }
+
+    swap(num_array + smaller + 1, num_array + end);
+    return smaller + 1;
+}
