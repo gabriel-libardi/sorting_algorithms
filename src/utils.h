@@ -36,6 +36,7 @@ void build_max_heap(int *heap, size_t length);
 void down_heapfy(int *heap, size_t start_index, size_t length);
 unsigned long max_pow_2(size_t positive_num);
 size_t partition(int *num_array, size_t beggining, size_t end);
+size_t lomuto_partition(int *num_array, size_t beggining, size_t end);
 
 
 #endif
